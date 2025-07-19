@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UNCODED AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Carousel wrapper hides overflow -->
+  <div class="carousel-wrapper">
+    <div class="slider-container">
+      <!-- Slide 1: Hero -->
+      <section class="slide" id="slide-1">
+        <header class="slide-header">
+          <div class="logo">UNCODED AI</div>
+          <nav class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+          </nav>
+        </header>
+        <div class="hero-content">
+          <div class="intro">
+            <h1>Hi, I'm <span class="highlight">Christina</span></h1>
+            <h2 class="typewriter"></h2>
+            <p>I hold a background in Biotechnology and Finance and, over the past three years, have developed a deep passion for harnessing data to drive insights. I specialize in crafting data-driven solutions and immersive analytics experiences using modern statistical techniques and machine-learning technologies.</p>
+            <button class="cta">Get In Touch</button>
+          </div>
+          <div class="profile-pic">
+            <img src="assets/christina.png" alt="Christina Profile Picture" alt="Christina Profile Picture" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: Portfolio -->
+      <section class="slide" id="slide-2">
+        <h1 class="portfolio-title">Portfolio</h1>
+        <div class="cards">
+          <div class="card">
+            <h3 class="repo-name">Book Summarisation LLM</h3>
+            <p class="repo-desc">
+              This repository contains code for summarising books using a language model.
+            </p>
+            <a href="https://github.com/yourusername/book-summarisation-llm" class="repo-link">
+              View on GitHub
+            </a>
+          </div>
+          <div class="card">
+            <h3 class="repo-name">Linear Optimisation Code</h3>
+            <p class="repo-desc">
+              A code repository implementing linear optimization techniques.
+            </p>
+            <a href="https://github.com/yourusername/linear-optimisation-code" class="repo-link">
+              View on GitHub
+            </a>
+          </div>
+          <div class="card">
+            <h3 class="repo-name">Patent Data Clustering</h3>
+            <p class="repo-desc">
+              Repository for clustering and analyzing patent data.
+            </p>
+            <a href="https://github.com/yourusername/patent-data-clustering" class="repo-link">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Services -->
+      <section class="slide" id="slide-3">
+        <h1 class="services-title">Services</h1>
+        <p class="services-desc">
+          Data Analysis · ML Models · Dashboarding · Consulting
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <!-- Dot navigation -->
+  <div class="dots-nav">
+    <span class="dot active" data-index="0"></span>
+    <span class="dot"        data-index="1"></span>
+    <span class="dot"        data-index="2"></span>
+  </div>
+
+  <!-- Typewriter & Carousel Logic -->
+  <script>
+    // Typewriter effect for "Data Scientist and Data Analyst"
+    const txt = "Data Scientist and Data Analyst";
+    const speed = 100;
+    let i = 0;
+    const typeEl = document.querySelector('.typewriter');
+    function typeWriter() {
+      if (i < txt.length) {
+        typeEl.innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', typeWriter);
+
+    // Carousel logic
+    const container = document.querySelector('.slider-container');
+    const dots = document.querySelectorAll('.dot');
+    let current = 0, total = dots.length;
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      container.classList.add('animated');
+      container.style.transform = `translateX(-${current * 100}vw)`;
+      dots.forEach(d => d.classList.toggle('active', +d.dataset.index === current));
+    }
+
+    // auto-advance every 5 seconds
+    setInterval(() => goTo(current + 1), 9000);
+
+    // dot click
+    dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.index)));
+
+    // remove transition class after animation
+    container.addEventListener('transitionend', () => {
+      container.classList.remove('animated');
+    });
+  </script>
+
+</body>
+</html>
+ 

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Portfolio Carousel</title>
+  <style>
+    /* Reset & variables */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body, html {
+      width: 100vw; height: 100vh;
+      overflow: hidden;
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    :root {
+      --bg: #2f2f2f;
+      --fg: #f5f6f7;
+      --accent: #ff7f00;
+      --accent-dark: #cc6600;
+      --card-bg: #1a1e28;
+      --card-border: rgba(255,255,255,0.1);
+    }
+
+    /* Carousel structure */
+    .carousel-wrapper { overflow: hidden; width:100%; height:100%; }
+    .slider-container {
+      display: flex; width:300vw;
+      transform: translateX(0);
+      transition: transform 0.6s ease;
+    }
+    .slide {
+      width:100vw; height:100vh;
+      padding:2rem; overflow-y:auto;
+      background: var(--bg);
+    }
+
+    /* Slide 1: Hero */
+    .slide-header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding-bottom:1rem;
+    }
+    .logo { font-size:1.5rem; font-weight:bold; color: var(--fg); }
+    .nav-links a {
+      color: var(--fg); margin-left:1.5rem; text-decoration:none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero-content {
+      display:flex; justify-content:space-between; align-items:center;
+      margin-top:4rem; gap:4rem; padding-right:4rem;
+    }
+    .intro { flex:1 1 45%; max-width:600px; }
+    .intro h1 { font-size:3.5rem; line-height:1.1; margin-bottom:.25rem; }
+    .highlight { color: var(--accent); }
+    .typewriter {
+      font-size:2.5rem; font-weight:600; display:inline-block;
+      border-right:2px solid var(--fg);
+      white-space:nowrap; overflow:hidden;
+      animation: blinkCursor .7s steps(1) infinite;
+      margin-bottom:1rem;
+    }
+    @keyframes blinkCursor {
+      0%,100%{border-color:transparent}50%{border-color:var(--fg)}
+    }
+    .intro p {
+      color:#ccc; font-size:1.1rem; line-height:1.8; margin-bottom:2rem;
+    }
+    .cta {
+      background:var(--accent); color:#000;
+      padding:.75rem 1.75rem; border:none; border-radius:.5rem;
+      cursor:pointer; font-size:1rem; transition:background .2s;
+    }
+    .cta:hover { background: var(--accent-dark); }
+
+    .profile-pic {
+      position:relative; flex:0 0 40%;
+      display:flex; align-items:center; justify-content:center;
+      padding-left:4rem;
+    }
+    .profile-pic::before {
+      content:""; position:absolute;
+      width:320px; height:320px; border-radius:50%;
+      border:4px solid var(--accent);
+      box-shadow:0 0 20px var(--accent);
+    }
+    .profile-pic img {
+      position:relative; width:280px; height:280px;
+      border-radius:50%; object-fit:cover;
+    }
+
+    /* Slide 2: Portfolio */
+    #slide-2 { text-align:center; }
+    .portfolio-title { font-size:3rem; margin-bottom:2rem; }
+    .cards {
+      display:flex; flex-wrap:wrap; justify-content:center;
+      align-items:stretch; gap:2rem;
+    }
+    .card {
+      background:var(--card-bg); border:1px solid var(--card-border);
+      border-radius:1rem; padding:1.5rem; width:320px;
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .repo-name {
+      font-size:1.5rem; margin-bottom:.75rem;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .repo-desc {
+      color:#aaa; line-height:1.4; margin-bottom:1rem; flex-grow:1;
+    }
+    .repo-link {
+      display:inline-block; margin-top:auto; margin:0 auto;
+      padding:.5rem 1rem; border:2px solid var(--accent);
+      border-radius:.75rem; color:var(--accent);
+      text-decoration:none; font-weight:500;
+      transition:background .2s,color .2s;
+    }
+    .repo-link:hover {
+      background:var(--accent); color:var(--bg);
+    }
+
+    /* “For more” GitHub link */
+    .more-projects {
+      margin-top:2rem; text-align:center;
+    }
+    .github-link {
+      display:inline-flex; align-items:center; gap:.5rem;
+      text-decoration:none; font-weight:600;
+      color:var(--fg); transition:color .2s;
+    }
+    .github-link svg {
+      fill:currentColor; width:24px; height:24px;
+    }
+    .github-link:hover { color:var(--accent); }
+
+    /* Slide 3: Services */
+    #slide-3 { text-align:center; }
+    .services-title { font-size:3rem; margin-bottom:1rem; }
+    .services-desc { color:#ccc; line-height:1.6; }
+
+    /* Dot navigation */
+    .dots-nav {
+      position:fixed; bottom:1.5rem; left:50%;
+      transform:translateX(-50%); display:flex; gap:1rem;
+    }
+    .dot {
+      width:14px; height:14px; background:rgba(255,255,255,.3);
+      border-radius:50%; cursor:pointer;
+      transition:background .2s, transform .2s;
+    }
+    .dot.active { background:var(--accent); transform:scale(1.3); }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .hero-content{ flex-direction:column; text-align:center; padding-right:0; gap:2rem; }
+      .profile-pic{ padding-left:0; margin-top:2rem; }
+      .cards{ flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carousel-wrapper">
+    <div class="slider-container" id="slider">
+
+      <!-- Slide 1: Hero -->
+      <section id="slide-1" class="slide">
+        <header class="slide-header">
+          <div class="logo">NEONDEV</div>
+          <nav class="nav-links">
+            <a href="#" data-target="0">Home</a>
+            <a href="#" data-target="1">About</a>
+            <a href="#" data-target="2">Projects</a>
+            <a href="#" data-target="2">Contact</a>
+          </nav>
+        </header>
+        <div class="hero-content">
+          <div class="intro">
+            <h1>Hi, I’m <span class="highlight">Emma Miller</span></h1>
+            <div class="typewriter">Web Developer</div>
+            <p>I create immersive digital experiences with cutting-edge web technologies. My passion is turning ideas into interactive realities that captivate users.</p>
+            <button class="cta">Get In Touch</button>
+          </div>
+          <div class="profile-pic">
+            <img src="https://via.placeholder.com/280" alt="Emma Miller">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: Portfolio -->
+      <section id="slide-2" class="slide">
+        <h2 class="portfolio-title">Portfolio</h2>
+        <div class="cards">
+          <div class="card">
+            <h3 class="repo-name">Book Summarisation LLM</h3>
+            <p class="repo-desc">Code for summarising entire books using a fine-tuned language model.</p>
+            <a href="#" class="repo-link">View on GitHub</a>
+          </div>
+          <div class="card">
+            <h3 class="repo-name">Linear Optimisation Code</h3>
+            <p class="repo-desc">A collection of linear programming solvers and example use-cases in Python.</p>
+            <a href="#" class="repo-link">View on GitHub</a>
+          </div>
+          <div class="card">
+            <h3 class="repo-name">Patent Data Clustering</h3>
+            <p class="repo-desc">Tools for clustering and visualising large patent datasets using sklearn.</p>
+            <a href="#" class="repo-link">View on GitHub</a>
+          </div>
+        </div>
+        <div class="more-projects">
+          <a href="https://github.com/CHRISPET111"
+             class="github-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 
+                   7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53
+                   -.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+                   -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07
+                   -.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 
+                   0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 
+                   0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 
+                   1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 
+                   1.92.08 2.12.51.56.82 1.27.82 2.15 
+                   0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 
+                   0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 
+                   8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+              </path>
+            </svg>
+            <span>For more</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Slide 3: Services -->
+      <section id="slide-3" class="slide">
+        <h2 class="services-title">Services</h2>
+        <p class="services-desc">
+          I offer full-stack web development, UI/UX design, and data-driven solutions to help businesses grow online.
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Dot navigation -->
+  <div class="dots-nav">
+    <div class="dot active" data-target="0"></div>
+    <div class="dot"        data-target="1"></div>
+    <div class="dot"        data-target="2"></div>
+  </div>
+
+  <script>
+    const slider = document.getElementById('slider');
+    const dots = document.querySelectorAll('.dot');
+    const links = document.querySelectorAll('.nav-links a');
+
+    function goToSlide(idx) {
+      slider.style.transform = `translateX(-${idx * 100}vw)`;
+      dots.forEach(d => d.classList.toggle('active', +d.dataset.target === idx));
+    }
+
+    dots.forEach(dot => dot.addEventListener('click', () => goToSlide(+dot.dataset.target)));
+    links.forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      goToSlide(+a.dataset.target);
+    }));
+  </script>
+</body>
+</html>
