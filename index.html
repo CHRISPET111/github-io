@@ -10,6 +10,7 @@
 
   <div class="carousel-wrapper">
     <div class="slider-container">
+
       <!-- Slide 1: Hero -->
       <section class="slide" id="slide-1">
         <header class="slide-header">
@@ -66,10 +67,11 @@
         <h2 class="services-title">Services</h2>
         <p class="services-desc">Data Analysis · ML Models · Dashboarding · Consulting</p>
       </section>
+
     </div>
   </div>
 
-  <!-- Dot nav -->
+  <!-- Dot navigation -->
   <div class="dots-nav">
     <div class="dot active" data-index="0"></div>
     <div class="dot"        data-index="1"></div>
@@ -77,7 +79,7 @@
   </div>
 
   <script>
-    // Typewriter
+    // Typewriter effect
     const txt = "Data Scientist and Data Analyst";
     let i = 0;
     const speed = 100;
@@ -90,7 +92,7 @@
     }
     document.addEventListener("DOMContentLoaded", typeWriter);
 
-    // Carousel
+    // Carousel logic
     const container = document.querySelector('.slider-container');
     const dots      = document.querySelectorAll('.dot');
     let current = 0, total = dots.length;
@@ -100,9 +102,11 @@
       dots.forEach(d => d.classList.toggle('active', +d.dataset.index === current));
     }
     goTo(0);
-    if (!('ontouchstart' in window)) setInterval(() => goTo(current + 1), 9000);
+    if (!('ontouchstart' in window)) {
+      setInterval(() => goTo(current + 1), 9000);
+    }
     dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
-    let startX=0;
+    let startX = 0;
     container.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     container.addEventListener('touchend', e => {
       const delta = e.changedTouches[0].clientX - startX;
