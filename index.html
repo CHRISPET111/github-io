@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- ensure correct scaling on mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UNCODED AI</title>
   <link rel="stylesheet" href="style.css" />
@@ -19,8 +20,9 @@
             <a href="#" data-index="0">Home</a>
             <a href="#" data-index="1">Portfolio</a>
             <a href="#" data-index="2">Services</a>
-            <a href="#" data-index="2">Contact</a>
+            <a href="#" data-index="3">Contact</a>
           </nav>
+          <button class="nav-toggle" aria-label="Toggle menu">☰</button>
         </header>
 
         <div class="hero-content">
@@ -48,7 +50,10 @@
           </div>
 
           <div class="profile-pic">
-            <img src="assets/christina.png" alt="Christina Profile Picture" />
+            <picture>
+              <source srcset="assets/christina@3x.png 3x, assets/christina@2x.png 2x" type="image/png">
+              <img src="assets/christina.png" alt="Christina Profile Picture">
+            </picture>
           </div>
         </div>
       </section>
@@ -123,7 +128,13 @@
         setTimeout(typeWriter, speed);
       }
     }
-    document.addEventListener("DOMContentLoaded", typeWriter);
+    document.addEventListener("DOMContentLoaded", () => {
+      typeWriter();
+      // toggle nav on mobile
+      document.querySelector('.nav-toggle').addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.toggle('open');
+      });
+    });
 
     // Carousel logic
     const container = document.querySelector('.slider-container');
@@ -131,7 +142,7 @@
     let current = 0, total = dots.length;
     function goTo(idx) {
       current = (idx + total) % total;
-      container.style.transform = translateX(-${current * 100}vw);
+      container.style.transform = `translateX(-${current * 100}vw)`;
       dots.forEach(d => d.classList.toggle('active', +d.dataset.index === current));
     }
     goTo(0);
