@@ -1,8 +1,18 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- ensure correct scaling on high‑density screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- Android PWA / Chrome on Pixel -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#2f2f2f">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" sizes="192x192" href="assets/icons/icon-192.png">
+  <link rel="shortcut icon" href="assets/icons/favicon.ico">
+
   <title>UNCODED AI</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -19,7 +29,7 @@
             <a href="#" data-index="0">Home</a>
             <a href="#" data-index="1">Portfolio</a>
             <a href="#" data-index="2">Services</a>
-            <a href="#" data-index="2">Contact</a>
+            <a href="#" data-index="3">Contact</a>
           </nav>
         </header>
 
@@ -31,7 +41,7 @@
               I hold a background in Biotechnology and Finance and, over the past three years,
               have developed a deep passion for harnessing data to drive insights. I specialize
               in crafting data-driven solutions and immersive analytics experiences using modern
-              statistical techniques and machine-learning technologies.
+              statistical techniques and machine‑learning technologies.
             </p>
 
             <div class="skills-section">
@@ -48,7 +58,12 @@
           </div>
 
           <div class="profile-pic">
-            <img src="assets/christina.png" alt="Christina Profile Picture" />
+            <!-- serve 1x, 2x, and 3x for high‑DPI -->
+            <img
+              src="assets/christina@1x.png"
+              srcset="assets/christina@2x.png 2x, assets/christina@3x.png 3x"
+              alt="Christina Profile Picture"
+            />
           </div>
         </div>
       </section>
@@ -87,12 +102,12 @@
           <div class="card">
             <img src="assets/ml-models.svg" alt="ML Models Icon" />
             <h3>Machine Learning Models</h3>
-            <p>Develop, train, and fine-tune predictive models for real-world impact.</p>
+            <p>Develop, train, and fine‑tune predictive models for real‑world impact.</p>
           </div>
           <div class="card">
             <img src="assets/web-scraping.svg" alt="Web Scraping Icon" />
             <h3>Web Scraping</h3>
-            <p>Automate extraction of high-quality data tailored to your objectives.</p>
+            <p>Automate extraction of high‑quality data tailored to your objectives.</p>
           </div>
           <div class="card">
             <img src="assets/scaling-up.svg" alt="Scaling Up Icon" />
@@ -112,38 +127,6 @@
     <div class="dot"        data-index="2"></div>
   </div>
 
-  <script>
-    // Typewriter effect
-    const txt = "Data Scientist and Analyst";
-    let i = 0, speed = 100;
-    const el = document.getElementById("typewriter");
-    function typeWriter() {
-      if (i < txt.length) {
-        el.innerHTML += txt.charAt(i++);
-        setTimeout(typeWriter, speed);
-      }
-    }
-    document.addEventListener("DOMContentLoaded", typeWriter);
-
-    // Carousel logic
-    const container = document.querySelector('.slider-container');
-    const dots      = document.querySelectorAll('.dot');
-    let current = 0, total = dots.length;
-    function goTo(idx) {
-      current = (idx + total) % total;
-      container.style.transform = `translateX(-${current * 100}vw)`;
-      dots.forEach(d => d.classList.toggle('active', +d.dataset.index === current));
-    }
-    goTo(0);
-    if (!('ontouchstart' in window)) setInterval(() => goTo(current + 1), 9000);
-    dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
-    let startX = 0;
-    container.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    container.addEventListener('touchend', e => {
-      const delta = e.changedTouches[0].clientX - startX;
-      if (delta > 50) goTo(current - 1);
-      if (delta < -50) goTo(current + 1);
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
