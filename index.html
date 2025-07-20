@@ -1,54 +1,149 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Layout</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UNCODED AI</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="logo">My Site</h1>
-      <nav class="nav">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </nav>
-      <button class="menu-toggle">☰</button>
+
+  <div class="carousel-wrapper">
+    <div class="slider-container">
+
+      <!-- Slide 1: Hero -->
+      <section class="slide" id="slide-1">
+        <header class="slide-header">
+          <div class="logo">UNCODED AI</div>
+          <nav class="nav-links">
+            <a href="#" data-index="0">Home</a>
+            <a href="#" data-index="1">Portfolio</a>
+            <a href="#" data-index="2">Services</a>
+            <a href="#" data-index="2">Contact</a>
+          </nav>
+        </header>
+
+        <div class="hero-content">
+          <div class="intro">
+            <h1>Hi, I'm <span class="highlight">Christina</span></h1>
+            <div class="typewriter" id="typewriter"></div>
+            <p>
+              I hold a background in Biotechnology and Finance and, over the past three years,
+              have developed a deep passion for harnessing data to drive insights. I specialize
+              in crafting data-driven solutions and immersive analytics experiences using modern
+              statistical techniques and machine-learning technologies.
+            </p>
+
+            <div class="skills-section">
+              <h3 class="skills-title">Skills</h3>
+              <div class="skills-list">
+                <span>Python</span>
+                <span>PostgreSQL</span>
+                <span>MySQL</span>
+                <span>AWS</span>
+                <span>Oracle</span>
+                <span>Git</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-pic">
+            <img src="assets/christina.png" alt="Christina Profile Picture" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: Portfolio -->
+      <section class="slide" id="slide-2">
+        <h2 class="portfolio-title">Portfolio</h2>
+        <div class="cards">
+          <div class="card">
+            <h3 class="repo-name">Book Summarisation LLM</h3>
+            <p class="repo-desc">Code for summarising books with an LLM.</p>
+            <a href="https://github.com/CHRISPET111/book-summarisation-llm" class="repo-link">View on GitHub</a>
+          </div>
+          <div class="card">
+            <h3 class="repo-name">Linear Optimisation Code</h3>
+            <p class="repo-desc">Python linear programming solvers.</p>
+            <a href="https://github.com/CHRISPET111/linear-optimisation-code" class="repo-link">View on GitHub</a>
+          </div>
+          <div class="card">
+            <h3 class="repo-name">Patent Data Clustering</h3>
+            <p class="repo-desc">Clustering & visualizing patent datasets.</p>
+            <a href="https://github.com/CHRISPET111/patent-data-clustering" class="repo-link">View on GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Services -->
+      <section class="slide" id="slide-3">
+        <h2 class="services-title">Services</h2>
+        <div class="cards services-cards">
+          <div class="card">
+            <img src="assets/data-science.svg" alt="Data Science Icon" />
+            <h3>Data Science</h3>
+            <p>Transform raw data into actionable insights and dynamic dashboards.</p>
+          </div>
+          <div class="card">
+            <img src="assets/ml-models.svg" alt="ML Models Icon" />
+            <h3>Machine Learning Models</h3>
+            <p>Develop, train, and fine-tune predictive models for real-world impact.</p>
+          </div>
+          <div class="card">
+            <img src="assets/web-scraping.svg" alt="Web Scraping Icon" />
+            <h3>Web Scraping</h3>
+            <p>Automate extraction of high-quality data tailored to your objectives.</p>
+          </div>
+          <div class="card">
+            <img src="assets/scaling-up.svg" alt="Scaling Up Icon" />
+            <h3>Scaling Up</h3>
+            <p>Design and deploy scalable infrastructure (AWS, Oracle, GCP) for growth.</p>
+          </div>
+        </div>
+      </section>
+
     </div>
-  </header>
+  </div>
 
-  <main class="container">
-    <section class="hero">
-      <h2>Welcome to My Responsive Site</h2>
-      <p>This layout adapts between Google Pixel mobile and desktop views.</p>
-    </section>
+  <!-- Dot navigation -->
+  <div class="dots-nav">
+    <div class="dot active" data-index="0"></div>
+    <div class="dot"        data-index="1"></div>
+    <div class="dot"        data-index="2"></div>
+  </div>
 
-    <section class="cards">
-      <article class="card">
-        <h3>Card 1</h3>
-        <p>Some example text for card one.</p>
-      </article>
-      <article class="card">
-        <h3>Card 2</h3>
-        <p>Some example text for card two.</p>
-      </article>
-      <article class="card">
-        <h3>Card 3</h3>
-        <p>Some example text for card three.</p>
-      </article>
-    </section>
-  </main>
+  <script>
+    // Typewriter effect
+    const txt = "Data Scientist and Analyst";
+    let i = 0, speed = 100;
+    const el = document.getElementById("typewriter");
+    function typeWriter() {
+      if (i < txt.length) {
+        el.innerHTML += txt.charAt(i++);
+        setTimeout(typeWriter, speed);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", typeWriter);
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 My Site. All rights reserved.</p>
-    </div>
-  </footer>
+    // Carousel logic
+    const container = document.querySelector('.slider-container');
+    const dots      = document.querySelectorAll('.dot');
+    let current = 0, total = dots.length;
+    function goTo(idx) {
+      current = (idx + total) % total;
+      container.style.transform = `translateX(-${current * 100}vw)`;
+      dots.forEach(d => d.classList.toggle('active', +d.dataset.index === current));
+    }
+    goTo(0);
+    if (!('ontouchstart' in window)) setInterval(() => goTo(current + 1), 9000);
+    dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
+    let startX = 0;
+    container.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    container.addEventListener('touchend', e => {
+      const delta = e.changedTouches[0].clientX - startX;
+      if (delta > 50) goTo(current - 1);
+      if (delta < -50) goTo(current + 1);
+    });
+  </script>
 </body>
 </html>
