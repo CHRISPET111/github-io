@@ -4,278 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UNCODED AI</title>
-  <style>
-    /* ==============================
-       Global Reset & Box Sizing
-       ============================== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* ==============================
-       Typography & Base Styles
-       ============================== */
-    html {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-                   "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      font-size: 16px;
-      scroll-behavior: smooth;
-    }
-    body {
-      color: #333;
-      background: #f8f9fa;
-      line-height: 1.6;
-    }
-
-    /* ==============================
-       Header & Navigation
-       ============================== */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #fff;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #e2e2e2;
-    }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
-    .nav-links a:hover {
-      color: #007bff;
-    }
-
-    /* ==============================
-       Dot Navigation
-       ============================== */
-    .dots-nav {
-      position: fixed;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      z-index: 50;
-    }
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #bbb;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .dot.active,
-    .dot:hover {
-      background: #007bff;
-    }
-
-    /* ==============================
-       Slide Sections (default flex row)
-       ============================== */
-    .slide {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      background: #fff;
-    }
-    .slide:nth-of-type(even) {
-      background: #f0f2f5;
-    }
-
-    /* ==============================
-       Hero / Intro Section
-       ============================== */
-    .hero-content {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      max-width: 1200px;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-    .intro {
-      flex: 1 1 400px;
-    }
-    .intro h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .highlight {
-      color: #007bff;
-    }
-    .typewriter {
-      font-family: monospace;
-      font-size: 1.25rem;
-      color: #555;
-      min-height: 1.5em;
-      margin-bottom: 1rem;
-      overflow: hidden;
-    }
-    .intro p {
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-    .skills-section {
-      margin-top: 1.5rem;
-    }
-    .skills-title {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-    }
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .skills-list span {
-      background: #e9ecef;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-    .profile-pic {
-      flex: 0 0 250px;
-      text-align: center;
-    }
-    .profile-pic img {
-      width: 100%;
-      max-width: 250px;
-      height: auto;
-      border-radius: 50%;
-      border: 4px solid #007bff;
-    }
-
-    /* ==============================
-       Portfolio & Services Cards (grid)
-       ============================== */
-    .cards,
-    .services-cards {
-      display: grid;
-      gap: 2rem;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .cards {
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-    .services-cards {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-    .card {
-      background: #fff;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-    }
-    .repo-name,
-    .services-cards .card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-    }
-    .repo-desc,
-    .services-cards .card p {
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      color: #555;
-    }
-    .repo-link {
-      text-decoration: none;
-      color: #007bff;
-      font-weight: 500;
-    }
-    .repo-link:hover {
-      text-decoration: underline;
-    }
-
-    /* ==============================
-       Typewriter Cursor Blink
-       ============================== */
-    @keyframes blink {
-      0%,100% { border-right-color: transparent; }
-      50%     { border-right-color: #555; }
-    }
-    .typewriter::after {
-      content: "";
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: #555;
-      margin-left: 2px;
-      animation: blink 1s step-end infinite;
-    }
-
-    /* ==============================
-       Override Slides 2 & 3 to stack vertically
-       ============================== */
-    #slide-2,
-    #slide-3 {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
-    .portfolio-title,
-    .services-title {
-      text-align: center;
-      width: 100%;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-    #slide-2 .cards,
-    #slide-3 .services-cards {
-      margin-bottom: 2rem;
-    }
-
-    /* ==============================
-       Responsive Breakpoints
-       ============================== */
-    @media (max-width: 1024px) {
-      .hero-content { gap: 1.5rem; }
-    }
-    @media (max-width: 768px) {
-      .nav-links,
-      .dots-nav {
-        display: none;
-      }
-      .hero-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      .intro h1 {
-        font-size: 2rem;
-      }
-      .skills-list {
-        justify-content: center;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -284,22 +13,23 @@
     <div class="logo">UNCODED AI</div>
     <nav class="nav-links">
       <a href="#slide-1">Home</a>
-      <a href="#slide-2">Blog</a>
+      <a href="#slide-2">Feed</a>
     </nav>
   </header>
 
-  <!-- DOT NAVIGATION -->
+  <!-- DOT NAV -->
   <div class="dots-nav">
     <div class="dot active" data-index="0"></div>
-    <div class="dot"        data-index="1"></div>
-    <div class="dot"        data-index="2"></div>
+    <div class="dot" data-index="1"></div>
+    <div class="dot" data-index="2"></div>
+    <div class="dot" data-index="3"></div>
   </div>
 
-  <!-- HERO SECTION -->
+  <!-- SLIDE 1: HERO -->
   <section class="slide" id="slide-1">
     <div class="hero-content">
       <div class="intro">
-        <h1>Hi, I'm <span class="highlight">Christina</span></h1>
+        <h1>Hi, I'm <span class="highlight">Christina Peters</span></h1>
         <div class="typewriter" id="typewriter"></div>
         <p>
           I hold a background in Biotechnology and Finance and, over the past three years,
@@ -307,20 +37,11 @@
           in crafting data-driven solutions and immersive analytics experiences using modern
           statistical techniques and machine-learning technologies.
         </p>
-        <div class="skills-section">
-          <h3 class="skills-title">Skills</h3>
-          <div class="skills-list">
-            <span>Python</span>
-            <span>PostgreSQL</span>
-            <span>MySQL</span>
-            <span>AWS</span>
-            <span>Oracle</span>
-            <span>Git</span>
-            <span>Power BI</span>
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>Javascript</span>
-          </div>
+        <div class="skills-list">
+          <span>Python</span><span>PostgreSQL</span><span>MySQL</span>
+          <span>AWS</span><span>Oracle</span><span>Git</span>
+          <span>Power BI</span><span>HTML</span><span>CSS</span>
+          <span>JavaScript</span>
         </div>
       </div>
       <div class="profile-pic">
@@ -329,32 +50,41 @@
     </div>
   </section>
 
-  <!-- PORTFOLIO SECTION -->
+  <!-- SLIDE 2: PORTFOLIO -->
   <section class="slide" id="slide-2">
-    <h2 class="portfolio-title">Portfolio</h2>
+    <h2 class="section-title">Portfolio</h2>
     <div class="cards">
       <div class="card">
-        <h3 class="repo-name">Book Summarisation LLM</h3>
-        <p class="repo-desc">Code for summarising books with an LLM.</p>
-        <a href="https://github.com/CHRISPET111/book-summarisation-llm" class="repo-link">View on GitHub</a>
+        <h3>Book Summarisation LLM</h3>
+        <p>Code for summarising books with an LLM.</p>
+        <a href="https://github.com/CHRISPET111/book-summarisation-llm"
+           class="repo-link" target="_blank" rel="noopener">
+          View on GitHub
+        </a>
       </div>
       <div class="card">
-        <h3 class="repo-name">Linear Optimisation Code</h3>
-        <p class="repo-desc">Python linear programming solvers.</p>
-        <a href="https://github.com/CHRISPET111/linear-optimisation-code" class="repo-link">View on GitHub</a>
+        <h3>Linear Optimisation Code</h3>
+        <p>Python linear programming solvers.</p>
+        <a href="https://github.com/CHRISPET111/linear-optimisation-code"
+           class="repo-link" target="_blank" rel="noopener">
+          View on GitHub
+        </a>
       </div>
       <div class="card">
-        <h3 class="repo-name">Patent Data Clustering</h3>
-        <p class="repo-desc">Clustering & visualizing patent datasets.</p>
-        <a href="https://github.com/CHRISPET111/patent-data-clustering" class="repo-link">View on GitHub</a>
+        <h3>Patent Data Clustering</h3>
+        <p>Clustering & visualizing patent datasets.</p>
+        <a href="https://github.com/CHRISPET111/patent-data-clustering"
+           class="repo-link" target="_blank" rel="noopener">
+          View on GitHub
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES SECTION -->
+  <!-- SLIDE 3: SERVICES -->
   <section class="slide" id="slide-3">
-    <h2 class="services-title">Services</h2>
-    <div class="cards services-cards">
+    <h2 class="section-title">Services</h2>
+    <div class="services-cards">
       <div class="card">
         <h3>Data Science</h3>
         <p>Transform raw data into actionable insights and dynamic dashboards.</p>
@@ -374,48 +104,63 @@
     </div>
   </section>
 
+  <!-- SLIDE 4: CONTACT -->
+  <section class="slide" id="slide-4">
+    <h2 class="section-title">Location & Contact</h2>
+    <div class="contact-info">
+      <p><strong>Location:</strong></p>
+      <p>Stuttgart, Germany</p>
+      <p><strong>Reach me at:</strong></p>
+      <div class="social-links">
+        <a href="https://www.youtube.com/@CHRISPET111" target="_blank" rel="noopener">
+          <img src="C:\Users\chris\OneDrive\Desktop\UNCODEDAI\assets\youtube icon.png" alt="YouTube" />
+        </a>
+        <a href="https://github.com/CHRISPET111" target="_blank" rel="noopener">
+          <img src="C:\Users\chris\OneDrive\Desktop\UNCODEDAI\assets\github.png" alt="GitHub" />
+        </a>
+        <a href="mailto:youremail@example.com">
+          <img src="C:\Users\chris\OneDrive\Desktop\UNCODEDAI\assets\gmail.png" alt="Gmail" />
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- SCRIPTS -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Typewriter
-      const txt = "Data Scientist and Analyst";
-      let idx = 0, speed = 100;
+    // Typewriter effect
+    const text = "Data Scientist and Analyst";
+    let pos = 0;
+    function typeWriter() {
       const el = document.getElementById('typewriter');
-      function typeWriter() {
-        if (idx < txt.length) {
-          el.innerHTML += txt.charAt(idx++);
-          setTimeout(typeWriter, speed);
+      if (pos < text.length) {
+        el.textContent += text.charAt(pos++);
+        setTimeout(typeWriter, 100);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', typeWriter);
+
+    // Slide nav & auto-rotate
+    const slides = document.querySelectorAll('.slide');
+    const dots   = document.querySelectorAll('.dot');
+    let current  = 0;
+    function goTo(i) {
+      slides[i].scrollIntoView({ behavior: 'smooth' });
+      dots.forEach(d => d.classList.remove('active'));
+      dots[i].classList.add('active');
+      current = i;
+    }
+    dots.forEach((d,i)=>d.addEventListener('click',()=>goTo(i)));
+    window.addEventListener('scroll',()=>{
+      slides.forEach((s,i)=>{
+        const t = s.getBoundingClientRect().top;
+        if (t >= -window.innerHeight/3 && t < window.innerHeight/3) {
+          dots.forEach(d=>d.classList.remove('active'));
+          dots[i].classList.add('active');
+          current = i;
         }
-      }
-      typeWriter();
-
-      // Slides & dots
-      const slides = document.querySelectorAll('.slide');
-      const dots   = document.querySelectorAll('.dot');
-      let currentIndex = 0, total = slides.length;
-      function goToSlide(n) {
-        currentIndex = n % total;
-        slides[currentIndex].scrollIntoView({ behavior: 'smooth' });
-        dots.forEach(d => d.classList.remove('active'));
-        dots[currentIndex].classList.add('active');
-      }
-      // Dot clicks
-      dots.forEach((d,i) => d.addEventListener('click', ()=>goToSlide(i)));
-      // Sync on manual scroll
-      window.addEventListener('scroll', () => {
-        slides.forEach((s,i) => {
-          const top = s.getBoundingClientRect().top;
-          if (top >= -window.innerHeight/3 && top < window.innerHeight/3) {
-            dots.forEach(d=>d.classList.remove('active'));
-            dots[i].classList.add('active');
-            currentIndex = i;
-          }
-        });
       });
-      // Auto‑advance every 9s
-      setInterval(() => goToSlide(currentIndex+1), 9000);
     });
+    setInterval(()=>goTo((current+1)%slides.length),7000);
   </script>
-
 </body>
 </html>
