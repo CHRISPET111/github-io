@@ -22,6 +22,7 @@
             <a href="#" data-index="2">Contact</a>
           </nav>
         </header>
+
         <div class="hero-content">
           <div class="intro">
             <h1>Hi, I'm <span class="highlight">Christina</span></h1>
@@ -32,8 +33,20 @@
               in crafting data-driven solutions and immersive analytics experiences using modern
               statistical techniques and machine-learning technologies.
             </p>
-            <button class="cta">Get In Touch</button>
+
+            <div class="skills-section">
+              <h3 class="skills-title">Skills</h3>
+              <div class="skills-list">
+                <span>Python</span>
+                <span>PostgreSQL</span>
+                <span>MySQL</span>
+                <span>AWS</span>
+                <span>Oracle</span>
+                <span>Git</span>
+              </div>
+            </div>
           </div>
+
           <div class="profile-pic">
             <img src="assets/christina.png" alt="Christina Profile Picture" />
           </div>
@@ -100,10 +113,9 @@
   </div>
 
   <script>
-    // Typewriter effect
+    // Typewriter effect for subtitle
     const txt = "Data Scientist and Analyst";
-    let i = 0;
-    const speed = 100;
+    let i = 0, speed = 100;
     const el = document.getElementById("typewriter");
     function typeWriter() {
       if (i < txt.length) {
@@ -123,15 +135,13 @@
       dots.forEach(d => d.classList.toggle('active', +d.dataset.index === current));
     }
     goTo(0);
-    if (!('ontouchstart' in window)) {
-      setInterval(() => goTo(current + 1), 9000);
-    }
+    if (!('ontouchstart' in window)) setInterval(() => goTo(current + 1), 9000);
     dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
     let startX = 0;
     container.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     container.addEventListener('touchend', e => {
       const delta = e.changedTouches[0].clientX - startX;
-      if (delta > 50)  goTo(current - 1);
+      if (delta > 50) goTo(current - 1);
       if (delta < -50) goTo(current + 1);
     });
   </script>
